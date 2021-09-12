@@ -25,6 +25,7 @@
                 margin-left: 250px;
             }
         </style>
+        <script type="text/javascript" src="ajaxloader.js"></script>
     </head>
     <body>
         <h1>Загрузка HTML-файлов</h1>
@@ -34,25 +35,16 @@
             <a href="fragments/notepadpp.html">Notepad++</a>
         </nav>
         <section id="output"></section>
-        <script type="text/javascript">
-        const links = document.querySelectorAll('nav a');
-        const output = document.getElementById('output');
-        const ajax = new XMLHttpRequest();
-        ajax.addEventListener('readystatechange', function () {
-if (this.readyState == 4 && this.status == 200)
-       output.innerHTML = this.responseText;
-        });
-
-        function loadHTML (evt) {
-            ajax.open ('GET', this.href, true);
-            ajax.send();
-            evt.preventDefault();
-        }
-
-        links.forEach((el)=> {
-            el.addEventListener('click', loadHTML);
-        });
-
-            </script>
     </body>
 </html>
+<script type="text/javascript">
+    const links = document.querySelectorAll('nav a');
+    const output = document.getElementById('output');
+    function loadHTML(evt) {
+        AJAXLoader.loadHTML(this.href, output);
+        evt.preventDefault();
+    }
+    links.forEach((el) => {
+        el.addEventListener('click', loadHTML);
+    });
+</script>
